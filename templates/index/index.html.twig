@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href={{asset('style.css', 'css')}}>
+        
+{% endblock %}
+
+
+{% block body %}
+
+  <section id="banner" class="py-5 text-center container-fluid">
+    <div class="row py-lg-5 ps-5">
+      <div class="col-lg-6 col-md-8 text-start">
+        <h1 class="fw-bold text-white">LOLanguanges: Lot Of Languages</h1>
+        <p class="fw-700 lead text-white">Engagez de vraies conversations plus rapidement : apprenez avec l'appli ou maintenant à l'aide de nouvelles classes en ligne dispensées par des professeurs qualifiés.</p>
+        <p>
+          <a href="#" class="btn btn-primary my-2">Commencer à apprendre</a>
+          <a href="#" class="btn btn-secondary my-2">Découvrir nos cours</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for course in courses %}
+        {% include "index/_course-card.html.twig" with {course:course} %}
+      {% endfor %}
+        
+      </div>
+    </div>
+  </div>
+{% endblock %}

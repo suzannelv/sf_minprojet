@@ -1,0 +1,7 @@
+section#banner {
+    background-image: url("https://img.freepik.com/photos-gratuite/fille-portant-casque-realite-virtuelle_23-2148771393.jpg?w=1380&t=st=1700944440~exp=1700945040~hmac=28375872e6eba59de077dfdf483dfa1c1b9636dd881f495d1c8e4ce5df10985b");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 600px;
+}
