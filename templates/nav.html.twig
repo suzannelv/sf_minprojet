@@ -3,7 +3,7 @@
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
           <a href="{{path('home')}}" class="d-inline-block pt-3">
-            <img src="assets/img/logo.svg" alt="logo">
+            <img src="/assets/img/logo.svg" alt="logo">
           </a>
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-end my-md-0 text-small">
@@ -27,9 +27,9 @@
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link text-secondary">
+              <a href="{{path('langue')}}" class="nav-link text-secondary">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
-                Products
+                Langues
               </a>
             </li>
             <li>
@@ -54,9 +54,16 @@
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
 
-        <div class="text-end">
-          <button type="button" class="btn btn-light text-dark me-2">Login</button>
-          <button type="button" class="btn btn-primary">Sign-up</button>
+         <div class="nav-item dropdown text-end">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-user"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{path('app_login')}}">Se connecter</a></li>
+            <li><a class="dropdown-item" href="{{path('app_logout')}}">Déconnecter</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{path('app_register')}}">S'inscrire</a></li>
+          </ul>
         </div>
       </div>
     </div>

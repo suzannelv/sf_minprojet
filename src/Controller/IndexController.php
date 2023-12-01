@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\CoursesRepository;
+use App\Repository\CourseRepository;
 use Knp\Component\Pager\PaginatorInterface; 
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(CoursesRepository $coursesRepository, PaginatorInterface $paginator): Response
+    public function index(CourseRepository $coursesRepository, PaginatorInterface $paginator): Response
     {
         $courses = $coursesRepository->findAll();
          $pagination = $paginator->paginate(

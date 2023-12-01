@@ -1,20 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LangueController!{% endblock %}
+{% block title %}Liste des langues{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container">
+{# langues #}
+    <h1 class="text-center"> Liste des langues</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for lang in languages %}
+        <ul>
+            <li><a href="{{path('lang_course', {id: lang.id})}}">{{lang.name}}</a></li>
+            {# <li><a href="{{path('lang_course')}}">{{lang.name}}</a></li> #}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/lvmei/Documents/sf_projet/src/Controller/LangueController.php'|file_link(0) }}">src/Controller/LangueController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/lvmei/Documents/sf_projet/templates/langue/index.html.twig'|file_link(0) }}">templates/langue/index.html.twig</a></code></li>
-    </ul>
+        </ul>
+      {% endfor %}    
+    </div>
+{# coours affiché selon la langue sélectionnée #}
+    {# <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for course in coursesCollection %}
+        {% include 'index/_course-card.html.twig' with {course.course} %}
+      {% endfor %}    
+    </div> #}
 </div>
 {% endblock %}

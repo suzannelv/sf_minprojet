@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CoursesRepository;
+use App\Repository\CourseRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CoursesRepository::class)]
-class Courses
+#[ORM\Entity(repositoryClass: CourseRepository::class)]
+class Course
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -29,9 +29,17 @@ class Courses
     #[ORM\Column]
     private ?bool $isFree = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'courses')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Languages $lang = null;
+    private ?Language $lang = null;
+
+    #[ORM\ManyToOne(inversedBy: 'courses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Teacher $teacher = null;
+
+    #[ORM\ManyToOne(inversedBy: 'course')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Level $level = null;
 
     public function getId(): ?int
     {
@@ -98,14 +106,38 @@ class Courses
         return $this;
     }
 
-    public function getLang(): ?Languages
+    public function getLang(): ?Language
     {
         return $this->lang;
     }
 
-    public function setLang(?Languages $lang): static
+    public function setLang(?Language $lang): static
     {
         $this->lang = $lang;
+
+        return $this;
+    }
+
+    public function getTeacher(): ?Teacher
+    {
+        return $this->teacher;
+    }
+
+    public function setTeacher(?Teacher $teacher): static
+    {
+        $this->teacher = $teacher;
+
+        return $this;
+    }
+
+    public function getLevel(): ?Level
+    {
+        return $this->level;
+    }
+
+    public function setLevel(?Level $level): static
+    {
+        $this->level = $level;
 
         return $this;
     }

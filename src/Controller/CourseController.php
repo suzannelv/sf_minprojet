@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Courses;
-use App\Repository\CoursesRepository;
+use App\Entity\Course;
+use App\Repository\CourseRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/course')]
 class CourseController extends AbstractController
 {
-    public function __construct(private CoursesRepository $courseRepository)
+    public function __construct(private CourseRepository $courseRepository)
     {
 
     }
@@ -32,9 +32,9 @@ class CourseController extends AbstractController
         ]);
     }
     #[Route('/{id}', name:'course_item')]
-    public function item(Courses $course): Response
+    public function item(Course $course): Response
     {
-        // $course = $this->courseRepository->find(Courses::class, $id);
+        // $course = $this->courseRepository->find(Course::class, $id);
         // if($course === null) {
         //     throw new NotFoundHttpException('Cours non trouvé');
         // }
