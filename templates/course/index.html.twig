@@ -5,9 +5,12 @@
 {% block body %}
 <div class="container">
     <h1 class="text-center"> Liste des cours</h1>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    {% include "course/langue/index.html.twig" %}
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-5">
       {% for course in courses %}
-        {% include "index/_course-card.html.twig" with {course:course} %}
+        {% include "index/_course-card.html.twig" with {course:course, lang: course.getLang().getName()} %}
       {% endfor %}    
     </div>
     <div class="navigation d-flex justify-content-center my-5">

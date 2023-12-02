@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Course;
+use App\Entity\Language;
 use App\Repository\CourseRepository;
+use App\Repository\LanguageRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,8 +21,9 @@ class CourseController extends AbstractController
 
     }
     #[Route('/', name: 'course_page')]
-    public function list(Request $request, PaginatorInterface $paginator): Response
+    public function list(Request $request, PaginatorInterface $paginator, LanguageRepository $languageRepository): Response
     {
+        $languages= $languageRepository->findAll();
         $courses = $paginator->paginate(
             $this->courseRepository->findAll(),
             $request->query->getInt('page', 1), 
@@ -29,18 +32,23 @@ class CourseController extends AbstractController
 
         return $this->render('course/index.html.twig', [
             'courses' => $courses,
+            'languages'=>$languages
         ]);
     }
     #[Route('/{id}', name:'course_item')]
     public function item(Course $course): Response
     {
-        // $course = $this->courseRepository->find(Course::class, $id);
-        // if($course === null) {
-        //     throw new NotFoundHttpException('Cours non trouvé');
-        // }
-        
+        $level= $course->getLevel();
+        $lang=$course->getLang();
+        $teacher=$course->getTeacher();
+        $profile = $teacher->getProfile();
+     
         return $this->render('course/item.html.twig',[
-            'course'=>$course
+            'course'=>$course,
+            'level'=>$level->getName(),
+            'lang'=>$lang->getName(),
+            'teacher'=> $teacher->getFirstname() . ' ' . $teacher->getLastname(),
+            'profile'=>$profile
         ]);
     }
 }

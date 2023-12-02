@@ -107,7 +107,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Entrez le mot de passe',
                     ]),
                     new Length([
-                        'min' => 8,
+                        'min' => 4,
                         'minMessage' => 'Votre mot de passe doit être au minimum {{ limit }} caractères',
                         'max' => 4096,
                     ]),
@@ -136,6 +136,7 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'csrf_protection' => false
         ]);
     }
 }

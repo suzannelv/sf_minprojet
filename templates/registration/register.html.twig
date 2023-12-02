@@ -22,9 +22,15 @@
               <div class="card-body p-md-5 text-black">
               <img src="assets/img/logo.svg" alt="logo" class="d-block mx-auto mb-4">
                 <h3 class="mb-5 text-uppercase text-center">Inscrivez-vous</h3>
-                {{ form_errors(registrationForm) }}
+                {% if form_errors(registrationForm) %}
+                <div class="alert alert-danger d-flex align-items-center justify-content-center" role="alert">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                  <div class="pt-2">
+                    {{ form_errors(registrationForm) }}
+                  </div>
+                </div>
+                {% endif %}
                 {{ form_start(registrationForm) }}
-
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
@@ -67,8 +73,8 @@
                 <div class="d-flex justify-content-end pt-3">
                     {{ form_row(registrationForm.submit) }}
                 </div>
-                    {{ form_errors(registrationForm) }}
-                    {{ form_start(registrationForm) }}
+                    
+                    {{ form_end(registrationForm) }}
               </div>
             </div>
           </div>

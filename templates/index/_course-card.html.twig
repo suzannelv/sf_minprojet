@@ -4,13 +4,13 @@
     <div class="card-body">
     <h2>{{course.name}}</h2>
       <p class="card-text">{{course.description | u.truncate(100, '...', false)}}</p>
-      <p class="card-text">Mise en ligne: {{course.createdAt | date('d-m-y')}}</p>
+      <p class="card-text"><span class="fw-semibold">Langues:</span> {{course.lang.name}} | {{course.level.name}}</p>
+      <p class="card-text"><span class="fw-semibold">Mise en ligne:</span> {{course.createdAt | date('d-m-y')}}</p>
 
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
           <a type="button" href="{{path('course_item', {id: course.id})}}" class="btn btn-sm btn-outline-secondary">Voir</a>
         </div>
-        <small class="text-body-secondary">9 mins</small>
       </div>
     </div>
   </div>
