@@ -5,8 +5,8 @@
 {% block body %}
 <div class="container">
     <h1 class="text-center"> Liste des cours</h1>
-
-    {% include "course/langue/index.html.twig" %}
+     
+    {% include "course/langue/index.html.twig" with {options: allLangues} only %}
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-5">
       {% for course in courses %}

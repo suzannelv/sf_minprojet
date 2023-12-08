@@ -5,19 +5,26 @@ namespace App\DataFixtures;
 use App\Entity\Course;
 use App\Entity\Language;
 use App\Entity\Level;
+// use App\Entity\Tag;
+use App\Entity\Tag;
 use App\Entity\Teacher;
 use App\Entity\User;
+// use App\Repository\CourseRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
 class AppFixtures extends Fixture
 {
     private const NB_COURSE = 30;
-    private const NB_LANG =6 ;
+    private const NB_LANG =6;
     private const NB_TEACHER = 10;
     private const NB_LEVEL = 3;
+    private const NB_TAG = 6;
+
     public function __construct(
+        // private CourseRepository $courseRepository,
         private string $adminEmail
     ) {
     }
@@ -26,7 +33,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create("fr_FR");
-
+        // user fixtures
         $regularUser = new User();
         $regularUser
             ->setFirstname($faker->firstName())
@@ -52,7 +59,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($adminUser);
 
-        
+        // langue fixtures
         $langs=[];
         for($i=0; $i<self::NB_LANG; $i++){
             $lang = new Language();
@@ -61,7 +68,7 @@ class AppFixtures extends Fixture
             $manager->persist($lang);
             $langs[] = $lang;
         }
-
+       // teacher fixture
         $teachers=[];
         for($i=0; $i<self::NB_TEACHER; $i++){
             $teacher= new Teacher();
@@ -72,6 +79,7 @@ class AppFixtures extends Fixture
             $teachers[] = $teacher;
         }
 
+        // level fixture
         $levels=[];
         for($i=0; $i<self::NB_LEVEL; $i++) {
             $level = new Level();
@@ -79,7 +87,23 @@ class AppFixtures extends Fixture
             $manager->persist($level);
             $levels[] = $level;
         }
+        // tag fixtures
+        $textColors = ['text-white', 'text-dark'];
+        $bgColors = ['bg-warning', 'bg-secondary', 'bg-primary', 'bg-success'];
+        $tags=[];
+        for($i=0; $i<self::NB_TAG; $i++){
+            $tag=new Tag();
+            $tag->setName($faker->word())
+                ->setBgColor($faker->randomElement($bgColors))
+                ->setTextColor($faker->randomElement($textColors));
 
+            $manager->persist($tag);
+            $tags[] = $tag;
+
+        }
+
+ 
+        // course fixture
         for($i=0; $i<self::NB_COURSE; $i++){
             $course = new Course();
             $course->setName($faker->words(3, true))
@@ -90,9 +114,17 @@ class AppFixtures extends Fixture
                    ->setTeacher($faker->randomElement($teachers))
                    ->setLevel($faker->randomElement($levels))
                    ->setIsFree($faker->boolean(80));
+                   
+            $nbTags = $faker->numberBetween(0, 4);
+            
+            for ($j = 0; $j < $nbTags; $j++){
+                $course->addTag($faker->randomElement($tags));
+            }
             $manager->persist($course);
         }
 
         $manager->flush();
     }
+
+
 }

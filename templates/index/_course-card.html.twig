@@ -3,6 +3,10 @@
     <img src="{{course.coverImage}}" alt="">
     <div class="card-body">
     <h2>{{course.name}}</h2>
+    {% for tag in course.tags %}
+      <span class="{{tag.bgColor}} {{tag.textColor}} badge" >{{tag.name}}</span>
+    {% endfor %}
+
       <p class="card-text">{{course.description | u.truncate(100, '...', false)}}</p>
       <p class="card-text"><span class="fw-semibold">Langues:</span> {{course.lang.name}} | {{course.level.name}}</p>
       <p class="card-text"><span class="fw-semibold">Mise en ligne:</span> {{course.createdAt | date('d-m-y')}}</p>

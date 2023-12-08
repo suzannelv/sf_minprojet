@@ -3,21 +3,20 @@
 {# {% block title %}Liste des langues{% endblock %} #}
 
 {% block body %}
-<div class="">
-
-    <h2 class="text-start fs-5"> Sélectionner la langue</h2>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      {% for lang in languages %}
-        <ul class="list-group">
-            <li class="list-group-item border-0"><a href="{{path('lang_course', {id: lang.id})}}" class="link-secondary link-underline-opacity-0">{{lang.name}}</a></li>
-        </ul>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Sélectionner la langue
+  </button>
+    <ul class="dropdown-menu">
+      {% for lang in options %}
+            <li><a href="{{path('lang_course', {id: lang.id})}}" class="dropdown-item">{{lang.name}}</a></li>
       {% endfor %}    
-    </div>
+   </ul>
+</div>
    {# cours affiché selon la langue sélectionnée #}
     {# <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       {% for course in coursesCollection %}
         {% include 'index/_course-card.html.twig' with {course.course} %}
       {% endfor %}    
     </div> #}
-</div>
 {% endblock %}

@@ -26,12 +26,7 @@
                 Cours
               </a>
             </li>
-            {# <li>
-              <a href="{{path('langue')}}" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
-                Langues
-              </a>
-            </li> #}
+          
             <li>
               <a href="#" class="nav-link text-secondary">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
@@ -53,6 +48,7 @@
         <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
+         {# {% include "partial/_search_data.html.twig" with {form:form} only %} #}
 
          <div class="nav-item dropdown text-end">
          {% if app.user %}
