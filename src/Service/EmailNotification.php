@@ -24,7 +24,7 @@ class EmailNotification
         ->htmlTemplate('registration/confirmation_email.html.twig')
         ->context([
           'expiration_date' => new \DateTime('+7 days'),
-          'user'=> $lastname() . ' ' . $firstname()
+          'user'=> $lastname . ' ' . $firstname
         ]);
      $this->mailer->send($email); 
   }

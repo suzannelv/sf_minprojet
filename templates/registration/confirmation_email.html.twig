@@ -1,11 +1,15 @@
-<h1>Hi! Please confirm your email!</h1>
+{# <h1>Hi! Please confirm your email!</h1>
 
 <p>
     Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl|raw }}">Confirm my Email</a>.
-    This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
-</p>
-
-<p>
-    Cheers!
-</p>
+    {# <a href="{{ signedUrl|raw }}">Confirm my Email</a>. #}
+    {# This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+</p> #}
+<h1>Merci pour votre inscription ({{ email.to[0].address }})</h1>
+    <p>
+        <a href="#">Cliquez ici pour activer votre compte {{email.to[0].address}}</a>
+        {# (Ce lien est valable jusqu'à {{expiration_date|date('d/m/y') }}) #}
+    </p>
+     <p>
+        {# <a href="{{url('newsletter_unsubscribed', {'id': user.id })}}">Cliquez ici pour désactiver votre compte {{email.to[0].address}}</a> #}
+    </p>

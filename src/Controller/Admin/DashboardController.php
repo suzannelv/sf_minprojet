@@ -29,18 +29,18 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Sf LOLanguages');
+            ->setTitle('SF - LOLanguages');
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Cours', 'fas fa-list', Course::class);
-        yield MenuItem::linkToCrud('Langues', 'fas fa-list', Language::class);
-        yield MenuItem::linkToCrud('Niveau', 'fas fa-list', Level::class);
-        yield MenuItem::linkToCrud('Etiquette', 'fas fa-list', Tag::class);
-        yield MenuItem::linkToCrud('Enseignant', 'fas fa-list', Teacher::class);
-        yield MenuItem::linkToCrud('Utilisateur', 'fas fa-list', User::class);
+        yield MenuItem::linkToCrud('Cours', 'fa-solid fa-graduation-cap', Course::class);
+        yield MenuItem::linkToCrud('Langues', 'fa-solid fa-language', Language::class);
+        yield MenuItem::linkToCrud('Niveau', 'fa-solid fa-layer-group', Level::class);
+        yield MenuItem::linkToCrud('Etiquette', 'fa-solid fa-tags', Tag::class);
+        yield MenuItem::linkToCrud('Enseignant', 'fa-solid fa-person-chalkboard', Teacher::class);
+        yield MenuItem::linkToCrud('Utilisateur', 'fa-solid fa-user-group', User::class);
 
     }
 }

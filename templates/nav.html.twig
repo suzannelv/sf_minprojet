@@ -26,19 +26,15 @@
                 Cours
               </a>
             </li>
-          
+          {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
             <li>
-              <a href="#" class="nav-link text-secondary">
+              <a href="{{path('admin')}}" class="nav-link text-secondary">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
                 Dashboard
               </a>
             </li>
-            <li>
-              <a href="#" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-                Customers
-              </a>
-            </li>
+          {% endif %}
+ 
           </ul>
         </div>
       </div>
@@ -50,21 +46,26 @@
         </form>
          {# {% include "partial/_search_data.html.twig" with {form:form} only %} #}
 
-         <div class="nav-item dropdown text-end">
+        <div class="nav-item dropdown text-end">
          {% if app.user %}
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <div class="flex">
+              <div class="flex flex-row align-items-center">
               {% if app.user.profileUser %}
-                <img src="{{app.user.profileUser}}" alt="" class="rounded-circle">
+                <a href="{{path('app_user')}}">
+                 <img src="{{app.user.profileUser}}" alt="" class="rounded-circle">
+                </a> 
                 {% else %}
                 <img src="https://img.freepik.com/vecteurs-libre/speech-bubbles-visages-souriants_23-2147512509.jpg?w=740&t=st=1701532284~exp=1701532884~hmac=eb5091d5a247ad4b702f3bee7d1499328448f251e838199a74c80cd4e7ca6742" alt="" class="rounded-circle">
               {% endif %}        
                 <span>Bienvenue {{app.user.userIdentifier}}</span>
               </div>
             </a>
+
+            
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{path('app_logout')}}">Déconnecter</a></li>
           </ul>
+       
           {% else %}
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-user"></i>

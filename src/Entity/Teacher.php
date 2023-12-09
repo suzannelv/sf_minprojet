@@ -102,4 +102,9 @@ class Teacher
 
         return $this;
     }
+    public function __toString(): string
+    {
+        // Customize this according to how you want the Teacher entity to be represented as a string
+        return $this->firstname . ' ' . $this->lastname;
+    }
 }

@@ -15,9 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -36,7 +38,10 @@ class RegistrationController extends AbstractController
         UserAuthenticatorInterface $userAuthenticator, 
         UserAuthenticator $authenticator, 
         EntityManagerInterface $entityManager, 
-        EmailNotification $emailNotification
+        EmailNotification $emailNotification,
+        UrlGeneratorInterface $urlGenerator,
+        VerifyEmailHelperInterface $verifyEmailHelper,
+
     ): Response
     {
         $user = new User();
@@ -60,15 +65,30 @@ class RegistrationController extends AbstractController
     
             $entityManager->persist($user);
             $entityManager->flush();
+        
     
 
             // generate a signed url and email it to the user
+            $signedUrl = $urlGenerator->generate(
+                'app_verify_email',
+                ['id' => $user->getId(), 
+                 'hash' => $verifyEmailHelper->generateSignature(
+                    'app_verify_email', 
+                    $user->getId(), 
+                    $user->getEmail())
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+            
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('confirmation@lol.com', 'User'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->context([
+                        'signedUrl'=>$signedUrl
+                    ])
             );
             // do anything else you need here, like send an email
 

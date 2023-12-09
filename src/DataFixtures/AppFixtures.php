@@ -5,15 +5,14 @@ namespace App\DataFixtures;
 use App\Entity\Course;
 use App\Entity\Language;
 use App\Entity\Level;
-// use App\Entity\Tag;
 use App\Entity\Tag;
 use App\Entity\Teacher;
 use App\Entity\User;
-// use App\Repository\CourseRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
@@ -23,9 +22,9 @@ class AppFixtures extends Fixture
     private const NB_LEVEL = 3;
     private const NB_TAG = 6;
 
-    public function __construct(
-        // private CourseRepository $courseRepository,
-        private string $adminEmail
+    public function __construct(   
+        private string $adminEmail,
+        private UserPasswordHasherInterface $hasher
     ) {
     }
 
@@ -39,9 +38,9 @@ class AppFixtures extends Fixture
             ->setFirstname($faker->firstName())
             ->setLastname($faker->lastName())
             ->setPseudo('Robot')
-            ->setProfileUser('https://img.freepik.com/vecteurs-libre/portrait-chat-cravate-lunettes-hipster-regard-isole-illustration-vectorielle_1284-1931.jpg?w=1060&t=st=1701436610~exp=1701437210~hmac=ff1bfcdd72dfa77462889badfcf974e35b07f61641ef6f5069cc0ab7ad6b3f01')
+            ->setProfileUser('/assets/img/user.png')
             ->setEmail('regular@lol.com')
-            ->setPassword('test')
+            ->setPassword($this->hasher->hashPassword($regularUser, 'test'))
             ->setIsVerified(true);
 
         $manager->persist($regularUser);
@@ -51,11 +50,11 @@ class AppFixtures extends Fixture
             ->setFirstname($faker->firstName())
             ->setLastname($faker->lastName())
             ->setPseudo('Lucas')
-            ->setProfileUser('https://img.freepik.com/vecteurs-libre/portrait-chat-cravate-lunettes-hipster-regard-isole-illustration-vectorielle_1284-1931.jpg?w=1060&t=st=1701436610~exp=1701437210~hmac=ff1bfcdd72dfa77462889badfcf974e35b07f61641ef6f5069cc0ab7ad6b3f01')
+            ->setProfileUser('/assets/img/admin.png')
             ->setEmail($this->adminEmail)
             ->setIsVerified(true)
             ->setRoles(["ROLE_ADMIN"])
-            ->setPassword('admin');
+            ->setPassword($this->hasher->hashPassword($adminUser,'admin'));
 
         $manager->persist($adminUser);
 
@@ -74,7 +73,7 @@ class AppFixtures extends Fixture
             $teacher= new Teacher();
             $teacher->setFirstname($faker->firstName())
                     ->setLastname($faker->lastName())
-                    ->setProfile($faker->imageUrl(250,250));
+                    ->setProfile('https://img.freepik.com/photos-gratuite/heureuse-femme-francaise-satisfaite-apparence-attrayante-leve-pouce-lui-montre-son-appreciation-son-accord_273609-17132.jpg?w=1380&t=st=1702137927~exp=1702138527~hmac=b8b2e2bc304556fc76c30729ca6f7ae895a7830528f26f52f2dcddbaa30a97d0');
             $manager->persist($teacher);
             $teachers[] = $teacher;
         }
@@ -108,7 +107,7 @@ class AppFixtures extends Fixture
             $course = new Course();
             $course->setName($faker->words(3, true))
                    ->setDescription($faker->paragraphs(3, true))
-                   ->setCoverImage($faker->imageUrl(360, 300, 'abstract', true, 'cats'))
+                   ->setCoverImage("https://img.freepik.com/photos-gratuite/portrait-femme-au-travail-ayant-appel-video_23-2148902316.jpg?w=1380&t=st=1702137630~exp=1702138230~hmac=a5d06d4681435f78353dc85a5952e40c67e7862e2705e90226b519c1896e49b3")
                    ->setCreatedAt($faker->dateTimeBetween('-2 years'))
                    ->setLang($faker->randomElement($langs))
                    ->setTeacher($faker->randomElement($teachers))

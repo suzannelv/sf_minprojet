@@ -1,6 +1,12 @@
 <div class="col">
-  <div class="card shadow-sm">
-    <img src="{{course.coverImage}}" alt="">
+  <div class="card shadow-sm course-card">
+
+    {% if course.coverImage starts with 'http' %}
+    <img src="{{ course.coverImage }}" alt="" class="cover-img img-fluid">
+    {% else %}
+    <img src="{{ app.request.basePath ~ '/uploads/images/' ~ course.coverImage }}" alt="" class="cover-img img-fluid">
+    {% endif %}
+  
     <div class="card-body">
     <h2>{{course.name}}</h2>
     {% for tag in course.tags %}
