@@ -13,8 +13,18 @@
   <section id="banner" class="py-5 text-center container-fluid">
     <div class="row py-lg-5 ps-5">
       <div class="col-lg-6 col-md-8 text-start mt-5 pt-5">
-        <h1 class="fw-bold text-white">LOLanguanges: Lot Of Languages</h1>
-        <p class="fw-900 lead text-white">Engagez de vraies conversations plus rapidement : apprenez avec l'appli ou maintenant à l'aide de nouvelles classes en ligne dispensées par des professeurs qualifiés.</p>
+        <h1 class="fw-bold text-white" 
+            data-aos="fade-right"
+            data-aos-offset="300"
+            data-aos-easing="ease-in-sine">
+            LOLanguanges: Lot Of Languages
+        </h1>
+        <p class="fw-900 lead text-white" 
+           data-aos="fade-left"
+           data-aos-anchor="#example-anchor"
+           data-aos-offset="1000"
+           data-aos-duration="1000">
+           Engagez de vraies conversations plus rapidement : apprenez avec l'appli ou maintenant à l'aide de nouvelles classes en ligne dispensées par des professeurs qualifiés.</p>
         <p>
           <a href="{{path('app_login')}}" class="btn btn-primary my-2">Commencer à apprendre</a>
           <a href="{{path('course_page')}}" class="btn btn-secondary my-2">Découvrir nos cours</a>
@@ -34,4 +44,26 @@
       </div>
     </div>
   </div>
+
+
+  <div id="contentContainer" class="trans3d"> 
+	<section id="carouselContainer" class="trans3d">
+		<figure id="item1" class="carouselItem trans3d"><div class="carouselItemInner trans3d">1</div></figure>
+		<figure id="item2" class="carouselItem trans3d"><div class="carouselItemInner trans3d">2</div></figure>
+		<figure id="item3" class="carouselItem trans3d"><div class="carouselItemInner trans3d">3</div></figure>
+		<figure id="item4" class="carouselItem trans3d"><div class="carouselItemInner trans3d">4</div></figure>
+		<figure id="item5" class="carouselItem trans3d"><div class="carouselItemInner trans3d">5</div></figure>
+		<figure id="item6" class="carouselItem trans3d"><div class="carouselItemInner trans3d">6</div></figure>
+		<figure id="item7" class="carouselItem trans3d"><div class="carouselItemInner trans3d">7</div></figure>
+		<figure id="item8" class="carouselItem trans3d"><div class="carouselItemInner trans3d">8</div></figure>
+		<figure id="item9" class="carouselItem trans3d"><div class="carouselItemInner trans3d">9</div></figure>
+		<figure id="item10" class="carouselItem trans3d"><div class="carouselItemInner trans3d">10</div></figure>
+		<figure id="item11" class="carouselItem trans3d"><div class="carouselItemInner trans3d">11</div></figure>
+		<figure id="item12" class="carouselItem trans3d"><div class="carouselItemInner trans3d">12</div></figure>	
+	</section>
+	</div>
+  
+  
+  
+
 {% endblock %}
