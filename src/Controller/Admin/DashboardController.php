@@ -42,5 +42,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Enseignant', 'fa-solid fa-person-chalkboard', Teacher::class);
         yield MenuItem::linkToCrud('Utilisateur', 'fa-solid fa-user-group', User::class);
 
+
     }
 }

@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Course;
 use App\Repository\CourseRepository;
 use App\Repository\LanguageRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -50,7 +52,30 @@ class CourseController extends AbstractController
             'lang'=>$lang->getName(),
             'teacher'=> $teacher->getFirstname() . ' ' . $teacher->getLastname(),
             'profile'=>$profile,
+            'teacher_id'=>$teacher->getId()
             // 'tag'=> $tag
         ]);
     }
+
+
+    #[Route('/toggle-favorite/{id}', name:'toggle_favorite', methods: ['POST'])]
+    public function toggleFavorites(Course $course, ManagerRegistry $manager): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            // If the user is not authenticated, you might want to handle this differently
+            return new JsonResponse(['message' => 'User not authenticated'], JsonResponse::HTTP_UNAUTHORIZED);
+        }
+
+        if ($user->getFavorites()->contains($course)) {
+            $user->removeFavorite($course);
+        } else {
+            $user->addFavorite($course);
+        }
+
+        $manager->getManager()->flush();
+
+        return new JsonResponse(['message' => 'Toggle successful']);
+    }
+
 }

@@ -9,27 +9,23 @@
           <ul class="nav col-12 col-lg-auto my-2 justify-content-end my-md-0 text-small">
             <li>
               <a href="{{path('home')}}" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
                 Accueil
               </a>
             </li>
             <li>
               <a href="{{path('about')}}" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
                 A propos
               </a>
             </li>
             
             <li>
               <a href="{{path('course_page')}}" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
                 Cours
               </a>
             </li>
           {% if app.user is not null and 'ROLE_ADMIN' in app.user.roles %}
             <li>
               <a href="{{path('admin')}}" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
                 Dashboard
               </a>
             </li>
@@ -57,7 +53,7 @@
                 {% else %}
                 <img src="https://img.freepik.com/vecteurs-libre/speech-bubbles-visages-souriants_23-2147512509.jpg?w=740&t=st=1701532284~exp=1701532884~hmac=eb5091d5a247ad4b702f3bee7d1499328448f251e838199a74c80cd4e7ca6742" alt="" class="rounded-circle">
               {% endif %}        
-                <span>Bienvenue {{app.user.userIdentifier}}</span>
+                <a href="{{path('app_user')}}" class="text-dark">Bienvenue {{app.user.userIdentifier}}</a>
               </div>
             </a>
 

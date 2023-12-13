@@ -66,7 +66,7 @@
         <div class="p-4 mb-3 bg-body-tertiary rounded text-center">
           <h4 class="fw-bold text-center">Notre enseignant/e</h4>
           <img src="{{asset(profile)}}" alt="{{teacher}}" class="rounded-5 mt-5 img-fluid" width="200" height="200">
-          <p class="my-5 fw-semibold fs-5">{{teacher}}</p>
+          <p class="my-5 fw-semibold fs-5"><a href="{{path('teacher_self', {id: teacher_id})}}" class=' text-black'>{{teacher}}</a></p>
         </div>
 
         <div>

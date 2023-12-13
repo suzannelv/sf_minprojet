@@ -46,9 +46,13 @@ class Course
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'course')]
     private Collection $tags;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favorites')]
+    private Collection $favoritedBy;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->favoritedBy = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -174,6 +178,33 @@ class Course
     {
         if ($this->tags->removeElement($tag)) {
             $tag->removeCourse($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getFavoritedBy(): Collection
+    {
+        return $this->favoritedBy;
+    }
+
+    public function addFavoritedBy(User $favoritedBy): static
+    {
+        if (!$this->favoritedBy->contains($favoritedBy)) {
+            $this->favoritedBy->add($favoritedBy);
+            $favoritedBy->addFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoritedBy(User $favoritedBy): static
+    {
+        if ($this->favoritedBy->removeElement($favoritedBy)) {
+            $favoritedBy->removeFavorite($this);
         }
 
         return $this;
