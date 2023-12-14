@@ -20,10 +20,9 @@
             LOLanguanges: Lot Of Languages
         </h1>
         <p class="fw-900 lead text-white" 
-           data-aos="fade-left"
-           data-aos-anchor="#example-anchor"
-           data-aos-offset="1000"
-           data-aos-duration="1000">
+           data-aos="fade-right"
+           data-aos-offset="300"
+           data-aos-easing="ease-in-sine">
            Engagez de vraies conversations plus rapidement : apprenez avec l'appli ou maintenant à l'aide de nouvelles classes en ligne dispensées par des professeurs qualifiés.</p>
         <p>
           <a href="{{path('app_login')}}" class="btn btn-primary my-2">Commencer à apprendre</a>
@@ -35,13 +34,11 @@
 
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
-
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       {% for course in courses %}
         {% include "index/_course-card.html.twig" with {course:course} %}
       {% endfor %}
       </div>
-      {% include "index/_extra.html.twig" %}
     </div>
   </div>
 

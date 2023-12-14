@@ -64,7 +64,7 @@ class CourseController extends AbstractController
         $user = $this->getUser();
         if (!$user) {
             // If the user is not authenticated, you might want to handle this differently
-            return new JsonResponse(['message' => 'User not authenticated'], JsonResponse::HTTP_UNAUTHORIZED);
+            return new JsonResponse(['message' => 'Utilisateur non authentifié'], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
         if ($user->getFavorites()->contains($course)) {
@@ -75,7 +75,7 @@ class CourseController extends AbstractController
 
         $manager->getManager()->flush();
 
-        return new JsonResponse(['message' => 'Toggle successful']);
+        return new JsonResponse(['message' => 'Ajouter au favori avec succès']);
     }
 
 }

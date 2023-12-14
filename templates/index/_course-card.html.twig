@@ -2,9 +2,14 @@
      data-aos-duration="3000">
   <div class="card shadow-sm course-card position-relative">
    {# icon de favori #} 
-   <i class="fas fa-heart position-absolute end-0 pe-2 mt-2
-       {% if app.user and course.getFavoritedBy().contains(app.user) %} active {% endif %}"
-       data-course-id="{{ course.id }}"></i>
+    <a href="#" class="favorite-toggle position-absolute end-0 pe-2 pt-2"
+      data-course-id="{{ course.id }}"
+      data-toggle-url="{{ path('toggle_favorite', {'id': course.id}) }}">
+      <i class="fas fa-heart {% if app.user and course in app.user.getFavorites() %}active{% endif %}"></i>
+    </a>
+    <div id="notification" class="notification"></div>
+
+
     {% if course.coverImage starts with 'http' %}
     
     <img src="{{ course.coverImage }}" alt="" class="cover-img img-fluid">
@@ -17,7 +22,6 @@
     {% for tag in course.tags %}
       <span class="{{tag.bgColor}} {{tag.textColor}} badge" >{{tag.name}}</span>
     {% endfor %}
-
       <p class="card-text">{{course.description | u.truncate(100, '...', false)}}</p>
       <p class="card-text"><span class="fw-semibold">Langues:</span> {{course.lang.name}} | {{course.level.name}}</p>
       <p class="card-text"><span class="fw-semibold">Mise en ligne:</span> {{course.createdAt | date('d-m-y')}}</p>
@@ -25,15 +29,9 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
           <a type="button" href="{{path('course_item', {id: course.id})}}" class="btn btn-sm btn-outline-secondary">Voir</a>
-          {# {% if app.user and course not in app.user.getFavorites() %} #}
-                <a href=""
-                    class="btn btn-sm btn-outline-primary">Ajouter aux favoris</a>
-                {# {% elseif app.user %} #}
-                <a href=""
-                    class="btn btn-sm btn-outline-danger">Retirer des favoris</a>
-                {# {% endif %} #}
         </div>
       </div>
+
     </div>
   </div>
 </div>

@@ -12,6 +12,16 @@ section#banner {
 .fas.fa-heart.active {
     color: red;
 }
+.notification {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    display: none;
+}
 
 .course-card {
     height: 550px;
