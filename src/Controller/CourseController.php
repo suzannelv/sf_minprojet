@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Course;
 use App\Repository\CourseRepository;
 use App\Repository\LanguageRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -43,8 +43,7 @@ class CourseController extends AbstractController
         $lang=$course->getLang();
         $teacher=$course->getTeacher();
         $profile = $teacher->getProfile();
-        // $tag=$course->getTags();
-        // var_dump($tag);
+ 
      
         return $this->render('course/item.html.twig',[
             'course'=>$course,
@@ -59,23 +58,25 @@ class CourseController extends AbstractController
 
 
     #[Route('/toggle-favorite/{id}', name:'toggle_favorite', methods: ['POST'])]
-    public function toggleFavorites(Course $course, ManagerRegistry $manager): JsonResponse
+    public function toggleFavorites(Course $course, EntityManagerInterface $manager): JsonResponse
     {
         $user = $this->getUser();
         if (!$user) {
-            // If the user is not authenticated, you might want to handle this differently
             return new JsonResponse(['message' => 'Utilisateur non authentifié'], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
-        if ($user->getFavorites()->contains($course)) {
-            $user->removeFavorite($course);
-        } else {
-            $user->addFavorite($course);
-        }
+        if ($course->isFavoritedBy($user)) {
+           $course->removeFavoritedBy($user);
+           $manager->flush();
+           return $this->json(['message'=> 'Votre favori a été supprimé.'], JsonResponse::HTTP_OK);
+        } 
 
-        $manager->getManager()->flush();
-
+        $course->addFavoritedBy($user);
+        $manager->flush(); 
+        
         return new JsonResponse(['message' => 'Ajouter au favori avec succès']);
+        }
+   
     }
 
-}
+

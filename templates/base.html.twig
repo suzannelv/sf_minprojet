@@ -15,7 +15,7 @@
         {% endblock %}
 
         {% block javascripts %}
-   
+        <script src="{{ asset('js/app.js') }}"></script>
         {% endblock %}
     </head>
     
@@ -31,57 +31,7 @@
          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
          <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
          <script>
-            AOS.init();
-            // script.js
-document.addEventListener("DOMContentLoaded", function () {
-    const favoriteToggleButtons = document.querySelectorAll(".favorite-toggle");
-
-    favoriteToggleButtons.forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            const courseId = button.getAttribute("data-course-id");
-            const toggleUrl = button.getAttribute("data-toggle-url");
-
-            toggleFavorite(courseId, toggleUrl);
-        });
-    });
-
-    function toggleFavorite(courseId, toggleUrl) {
-        axios
-            .post(
-                toggleUrl,
-                {},
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-Requested-With": "XMLHttpRequest",
-                    },
-                    withCredentials: true,
-                }
-            )
-            .then((response) => {
-                console.log(response.data);
-                // Check for 'Toggle successful' message
-                if (response.data.message === "Ajouter au favori avec succès") {
-                    alert("Ajouter au favori avec succès");
-                    // Update the color of the heart icon
-                    const heartIcon = button.querySelector("i");
-                    heartIcon.classList.toggle("active");
-                } else {
-                    alert("Supprimer favori");
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                alert("erreur survenue");
-            });
-
-        // Prevent the default action of the anchor link
-        event.preventDefault();
-    }
-});
-
+            AOS.init();           
          </script>
     </body>
 </html>

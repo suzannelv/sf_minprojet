@@ -5,9 +5,10 @@
     <a href="#" class="favorite-toggle position-absolute end-0 pe-2 pt-2"
       data-course-id="{{ course.id }}"
       data-toggle-url="{{ path('toggle_favorite', {'id': course.id}) }}">
-      <i class="fas fa-heart {% if app.user and course in app.user.getFavorites() %}active{% endif %}"></i>
+      <i class="fas fa-heart {% if app.user and course in app.user.getFavorites() %}active{% endif %}"></i>  
+      
     </a>
-    <div id="notification" class="notification"></div>
+    <div id="notification" class="notification position-absolute"></div>
 
 
     {% if course.coverImage starts with 'http' %}

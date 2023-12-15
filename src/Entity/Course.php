@@ -209,4 +209,13 @@ class Course
 
         return $this;
     }
+
+    public function isFavoritedBy(User $user): bool
+    {
+        return $this->favoritedBy->contains($user);
+    }
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 }
