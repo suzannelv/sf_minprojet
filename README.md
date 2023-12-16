@@ -8,7 +8,7 @@ Dans ce projet, plusieurs fonctionnalités ont été implémentées :
 
 ### 1. Entités
 
-L'entité `Course` est l'une des entités les plus importantes pour présenter les données aux utilisateurs. Elle est liée aux autres entités avec des relations `ManyToOne` (entités `Teacher`, `Level`, `Language`) et `ManyToMany` (`Tag`).
+L'entité `Course` est l'une des entités les plus importantes pour présenter les données aux utilisateurs. Elle est liée aux autres entités avec des relations `ManyToOne` (entités `Teacher`, `Level`, `Language`) et `ManyToMany` (`Tag`, `favori`).
 
 L'entité `User` possède deux types de rôles, `ROLE_USER` (par défaut) et `ROLE_ADMIN`. Cette partie sera expliquée dans la section de contrôle d'accès.
 
@@ -54,6 +54,42 @@ Pour les opérations CRUD, seuls les utilisateurs ayant le rôle `ROLE_ADMIN` pe
 
 Sur la page `/admin`, il est possible de modifier toutes les données concernant les cours et les utilisateurs.
 
+### 6.1 configureCrud & configureFields
+
+Dans les contrôleurs d'EasyAdmin, j'ai personnalisé les champs de saisie pour le mode d'affichage.
+
+```php
+   public function configureCrud(Crud $crud): Crud
+    {
+        return $crud->setEntityLabelInPlural("Utilisateurs")
+                    ->setEntityLabelInSingular("Utilisateur")
+                    ->setPageTitle("index", "LOLanguages - Admin des utilisateurs")
+                    ->setPaginatorPageSize(10);
+    }
+
+    public function configureFields(string $pageName): iterable
+    {
+        return [
+            IdField::new('id')
+                   ->hideOnForm()//ne pas afficher le champs de id,
+            TextField::new('email')
+                   ->setFormTypeOption('disabled', 'disabled'),// désactiver le champs de email
+            TextField::new('fullname'),
+            TextField::new('pseudo'),
+            ArrayField::new('roles'),
+        ];
+    }
+```
+
+Par exemple, j'ai ajusté le titre pour qu'il soit en français (par défaut, il est en anglais).
+
+![user config](./public/assets/img/dashbord-user.png)
+
+J'ai également mis en place la possibilité de choisir quels champs afficher et lesquels ne pas afficher, ainsi que des fonctions de désactivation pour empêcher toute modification par les administrateurs. Dans cet exemple, je présente la configuration spécifique de l'entité `User`.
+
+Par ailleurs, j'ai intégré un champ de rôle qui facilite la gestion des opérations liées aux rôles des utilisateurs.
+![user role](./public/assets/img/form-user.png)
+
 ## 7. Contrôle d'accès
 
 Sur la page d'accueil, tous les utilisateurs peuvent voir les cours, mais en cliquant sur un cours détaillé, ils sont redirigés directement vers la page de connexion, car elle est **réservée aux utilisateurs inscrits**.
@@ -65,3 +101,7 @@ access_control:
 ```
 
 Comme mentionné précédemment, l'accès à la page **Dashboard** est **réservé aux utilisateurs ayant le rôle administrateur**.
+
+### 8. fonction "favori"
+
+### 9. Pagination

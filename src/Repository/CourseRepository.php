@@ -21,10 +21,8 @@ class CourseRepository extends ServiceEntityRepository
         parent::__construct($registry, Course::class);
     }
 
-//    /**
-//     * @return Course[] Returns an array of Course objects
-//     */
-//    public function findByExampleField($value): array
+
+//    public function findCourse($course): array
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

@@ -24,6 +24,7 @@ section#banner {
 
 .course-card {
     height: 550px;
+    width: 800px !important;
 }
 .course-card .cover-img {
     height: 50%;
