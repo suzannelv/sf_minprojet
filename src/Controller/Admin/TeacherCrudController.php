@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Teacher;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -14,15 +15,13 @@ class TeacherCrudController extends AbstractCrudController
     {
         return Teacher::class;
     }
-
-    /*
-    public function configureFields(string $pageName): iterable
+    public function configureCrud(Crud $crud): Crud
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        return $crud->setEntityLabelInPlural("Enseignants")
+                    ->setEntityLabelInSingular("Enseignant/e")
+                    ->setPageTitle("index", "LOLanguages - Admin des enseignants")
+                    ->setPaginatorPageSize(10);
     }
-    */
+
+  
 }

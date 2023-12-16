@@ -36,6 +36,14 @@ class IndexController extends AbstractController
         return $this->render('index/about.html.twig');
     }
 
+    #[Route('/contact', name: 'contact')]
+    public function contact(): Response
+    {
+       
+        return $this->render('index/contact.html.twig');
+    }
+
+    #[Route('/search', name: 'search')]
     public function searchBar( Request $request): Response
     {
         $searchData =new SearchData();

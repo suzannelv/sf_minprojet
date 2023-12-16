@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Language;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -14,15 +15,12 @@ class LanguageCrudController extends AbstractCrudController
     {
         return Language::class;
     }
-
-    /*
-    public function configureFields(string $pageName): iterable
+    public function configureCrud(Crud $crud): Crud
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        return $crud->setEntityLabelInPlural("Langues")
+                    ->setEntityLabelInSingular("Langue")
+                    ->setPageTitle("index", "LOLanguages - Admin des langues")
+                    ->setPaginatorPageSize(10);
     }
-    */
+  
 }

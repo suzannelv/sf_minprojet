@@ -6,12 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
     favoriteToggleButtons.forEach(function (button) {
         button.addEventListener("click", function (event) {
             event.preventDefault();
-
             const courseId = button.getAttribute("data-course-id");
             const toggleUrl = button.getAttribute("data-toggle-url");
             const notificationElement = button
                 .closest(".course-card")
-                .querySelector(".notification");
+                .querySelectorAll(".notification");
 
             axios
                 .post(
@@ -43,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         // cacher la notification au bout de 3 secondes
                         requestAnimationFrame(() => {
-                            // Hide the notification after a certain time (e.g., 3000 milliseconds)
                             setTimeout(() => {
                                 notificationElement.style.display = "none";
                             }, 3000);

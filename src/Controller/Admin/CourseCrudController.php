@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Course;
 use App\Entity\Tag;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -19,7 +20,13 @@ class CourseCrudController extends AbstractCrudController
     {
         return Course::class;
     }
-
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud->setEntityLabelInPlural("Cours")
+                    ->setEntityLabelInSingular("Cours")
+                    ->setPageTitle("index", "LOLanguages - Admin des cours")
+                    ->setPaginatorPageSize(10);
+    }
  
     public function configureFields(string $pageName): iterable
     {

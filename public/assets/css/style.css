@@ -5,6 +5,7 @@ section#banner {
     background-repeat: no-repeat;
     height: 600px;
 }
+
 .fas.fa-heart {
     color: grey;
 }
@@ -13,8 +14,8 @@ section#banner {
     color: red;
 }
 .notification {
-    top: 10px;
-    right: 10px;
+    top: 25px;
+    right: 25px;
     padding: 10px;
     background-color: #afedb1;
     color: white;
@@ -22,11 +23,7 @@ section#banner {
     display: none;
 }
 
-.course-card {
-    height: 550px;
-    width: 800px !important;
-}
-.course-card .cover-img {
+.cover-img {
     height: 50%;
 }
 .form-signin {
@@ -71,4 +68,83 @@ a {
 
 a:hover {
     color: rgba(255, 255, 255, 1);
+}
+
+/* contact */
+
+.contact {
+    padding: 130px 0;
+}
+
+.contact .heading h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+
+.contact .heading h2 span {
+    color: #2644f1;
+}
+
+.contact .heading p {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #999999;
+    margin: 20px 0 60px;
+    padding: 0;
+}
+
+.contact .form-control {
+    padding: 25px;
+    font-size: 13px;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+    border: 0;
+    border-radius: 10px;
+}
+
+.contact button.btn {
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #fbab42;
+    color: #ffffff;
+}
+
+.contact .title h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.contact .title p {
+    font-size: 14px;
+    font-weight: 400;
+    color: #999;
+    line-height: 1.6;
+    margin: 0 0 40px;
+}
+
+.contact .content .info {
+    margin-top: 30px;
+}
+.contact .content .info i {
+    font-size: 30px;
+    padding: 0;
+    margin: 0;
+    color: #02434b;
+    margin-right: 20px;
+    text-align: center;
+    width: 20px;
+}
+.contact .content .info h4 {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.contact .content .info h4 span {
+    font-size: 13px;
+    font-weight: 300;
+    color: #999999;
 }

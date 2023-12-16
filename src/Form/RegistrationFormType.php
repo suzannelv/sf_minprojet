@@ -12,9 +12,11 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -114,6 +116,15 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('profileUser', FileType::class, [
+                'required'=>false,
+                'mapped' => false,
+                'constraints'=>[
+                    new Image([
+                        'maxSize'=>'5000k',
+                        'mimeTypesMessage' => 'Le format d\'image est invalide.',
+                    ],
+                    )
+                ],
                 'label'=>'Télécharger votre photo',
                 'label_attr'=>[
                     'class'=>'form-label'
@@ -122,7 +133,16 @@ class RegistrationFormType extends AbstractType
                     'class'=>'form-control'
                 ]
 
-            ])      
+            ])     
+            // ->add('imageFile', VichFileType::class, [
+            //     'label'=>'Télécharger votre photo',
+            //     'label_attr'=>[
+            //     'class'=>'form-label'
+            //     ],
+            //     'attr'=>[
+            //         'class'=>'form-control'
+            //     ]
+            // ]) 
             ->add('submit', SubmitType::class, [
                 'label'=>'S\'inscrire',
                 'attr'=>[

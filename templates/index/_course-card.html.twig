@@ -1,14 +1,13 @@
 <div class="col" data-aos="fade-up"
      data-aos-duration="3000">
-  <div class="card shadow-sm course-card position-relative">
+  <div class="card shadow-sm position-relative course-card">
    {# icon de favori #} 
     <a href="#" class="favorite-toggle position-absolute end-0 pe-2 pt-2"
       data-course-id="{{ course.id }}"
       data-toggle-url="{{ path('toggle_favorite', {'id': course.id}) }}">
       <i class="fas fa-heart {% if app.user and course in app.user.getFavorites() %}active{% endif %}"></i>  
-      
     </a>
-    <div id="notification" class="notification position-absolute"></div>
+    <div id="notification-{{course.id}}" class="notification position-absolute"></div>
 
 
     {% if course.coverImage starts with 'http' %}

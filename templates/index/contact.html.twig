@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+
+{% block body %}
+<section class="contact" id="contact">
+  <div class="container">
+      <div class="heading text-center">
+        <h2 class="fs-4">Contactez - <span> Nous </span></h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        <br>incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+            <div class="title">
+              <h3>Contact</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </p>
+            </div>
+            <div class="content">
+                <!-- Info-1 -->
+                <div class="info">
+                  <i class="fas fa-mobile-alt"></i>
+                  <h4 class="d-inline-block">PHONE :
+                  <br>
+                  <span>+3333333333</span></h4>
+                </div>
+                <!-- Info-2 -->
+                <div class="info">
+                    <i class="far fa-envelope"></i>
+                    <h4 class="d-inline-block">EMAIL :
+                    <br>
+                    <span>lolanguages@info.com</span></h4>
+                </div>
+                <!-- Info-3 -->
+                <div class="info">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <h4 class="d-inline-block">ADDRESSE :<br>
+                  <span>Lyon , France</span></h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+          <form>
+            <div class="row">
+              <div class="col-sm-6">
+                  <input type="text" class="form-control" placeholder="Nom">
+              </div>
+              <div class="col-sm-6">
+                  <input type="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="col-sm-12">
+                  <input type="text" class="form-control" placeholder="Subjet">
+              </div>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" rows="5" id="comment" placeholder="Message"></textarea>
+            </div>
+            <button class="btn" type="submit">Envoyer</button>
+          </form>
+        </div>
+      </div>
+  </div>
+</section>
+
+{% endblock %}

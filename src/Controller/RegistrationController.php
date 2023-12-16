@@ -10,6 +10,7 @@ use App\Service\EmailNotification;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
@@ -17,6 +18,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
@@ -26,6 +28,7 @@ class RegistrationController extends AbstractController
 
     public function __construct(
         private EmailVerifier $emailVerifier,
+
         )
     {
 
@@ -41,6 +44,7 @@ class RegistrationController extends AbstractController
         EmailNotification $emailNotification,
         UrlGeneratorInterface $urlGenerator,
         VerifyEmailHelperInterface $verifyEmailHelper,
+        SluggerInterface $slugger
 
     ): Response
     {
@@ -49,7 +53,26 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            $profilImage = $form->get('profileUser')->getData();
+            if($profilImage){
+                $originalFilename = pathinfo($profilImage->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$profilImage->guessExtension();
+
+                try {
+                    $profilImage->move(
+                        $this->getParameter('photo_dir'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // $this->logger->error('An error occurred while uploading the file: ' . $e->getMessage());
+                  
+                }
+
+                $user->setProfileUser($newFilename); 
+            }
+
+
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -60,6 +83,7 @@ class RegistrationController extends AbstractController
             $email = $user->getEmail();
             $firstname = $user->getFirstname();
             $lastname = $user->getLastname();
+           
     
             $emailNotification->confirmInscription($email, $lastname, $firstname);
     

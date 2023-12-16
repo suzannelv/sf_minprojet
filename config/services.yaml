@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     app.admin_email: "admin@lol.com"
+    photo_dir: "%kernel.project_dir%/public/uploads/images"
 
 services:
     # default configuration for services in *this* file
@@ -13,6 +14,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             string $adminEmail: "%app.admin_email%"
+            # string $photoDir: "%photo.dir%"
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
