@@ -369,7 +369,7 @@ Afin de mettre en œuvre cette fonctionnalité, je me suis référé à la docum
 
 ## Conclusion
 
-Au terme de 4 semaines d'immersion dans l'apprentissage de Symfony, j'ai acquis une compréhension qui a redéfini mes perspectives sur le développement en PHP. Bien que le processus ait été rempli de défis et de moments de frustration, notamment en raison de la vaste étendue des concepts à assimiler, cette expérience a marqué mes débuts dans l'apprentissage d'un framework backend. Ma motivation reste intacte, nourrie par le désir d'approfondir mes connaissances à travers la pratique. J'espère ainsi réaliser des progrès significatifs à travers des pratique dans le futur et développer une compréhension solide du fonctionnement interne de Symfony.
+Au terme de 4 semaines d'immersion dans l'apprentissage de Symfony, j'ai acquis une compréhension qui a redéfini mes perspectives sur le développement en PHP. Bien que le processus ait été rempli de défis et de moments de frustration, A travers ce projet, j'ai pu quand même mettre en œuvre plusieurs fonctionnalités clés, telles que la gestion des entités, les contrôleurs, la sécurité avec le composant Symfony Security, l'inscription des utilisateurs avec l'Authenticator, la gestion des rôles, la pagination avec le bundle KnpPaginator, l'utilisation d'EasyAdmin pour l'administration CRUD, et la mise en place de la fonctionnalité "Favoris".
 
 ### points à améliorer
 
@@ -379,6 +379,18 @@ Plutôt que de créer un e-mail spécifique pour informer les utilisateurs de le
 
 Bien que j'aie utilisé la commande `make:registration-form` pour générer automatiquement les fichiers nécessaires en lien avec le formulaire d'inscription, la gestion du Mailer reste un point d'interrogation pour moi. J'ai tenté de configurer les classes nécessaires dans le fichier `Service/EmailNotification.php`, mais malheureusement, cela n'a pas produit les résultats escomptés. Je m'efforcerai de comprendre plus en profondeur le fonctionnement du Mailer de Symfony afin d'optimiser cette fonctionnalité.
 
+Pour réaliser cette partie de l'exercice portant sur le **test d'envoi d'e-mails**, j'ai mis en place un nouveau formulaire de contact en utilisant le `ContactController`, le formulaire `ContactType`, l'entité `Contact`, etc.
+
+Sur la page de contact, tous les utilisateurs, qu'ils soient inscrits ou non, ont la possibilité d'envoyer des messages. Pour les utilisateurs inscrits, leurs noms, prénoms et adresses e-mail s'affichent automatiquement dans les champs correspondants du formulaire.
+
+![contact form](./public/assets/img/contact.png)
+
+En utilisant les configurations de mailer_dsn du cours, j'ai effectué des tests d'envoi d'e-mails. Malheureusement, je n'ai rien reçu dans ma boîte de réception. Cependant, les données sont correctement enregistrées dans la base de données. Afin de résoudre ce problème, j'ai créé une nouvelle configuration mailer_dsn, mais malgré cela, je n'ai toujours rien reçu, et aucune erreur n'est affichée.
+
+Comme je n'ai rien reçu, je n'ai pas pu passer à l'étape suivante consistant à refactoriser le code dans un autre fichier.
+
 #### Champs de recherche
 
-Dans ce projet
+Dans ce projet, j'ai cherché à implémenter une fonctionnalité de barre de recherche permettant aux utilisateurs de trouver leurs cours en fonction des mots clés saisis. Pour cela, j'ai mis en place une fonction dans le contrôleur `IndexController`, créé un formulaire `SearchType`, défini un modèle `SearchData` dans le répertoire `Model`, etc. Cependant, je n'ai pas réussi à faire fonctionner la barre de recherche comme prévu. En raison des contraintes de temps, je n'ai pas pu résoudre ce problème avant la date limite de rendu du projet. C'est donc un aspect que je prévois d'améliorer et de développer dans un avenir proche.
+
+Malgré ces défis, cette expérience a renforcé dans une certaine mesure ma compréhension de Symfony. Je suis consciente des aspects à améliorer et suis motivée à continuer à apprendre et à perfectionner mes compétences Symfony dans mes projets futurs.

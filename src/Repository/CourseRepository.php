@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Course;
+use App\Model\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,6 +21,22 @@ class CourseRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Course::class);
+    }
+
+    public function getSearchQueryBuilder(SearchData $searchData): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+
+        // Appliquer la logique de recherche ici
+        if ($searchData->getQ()) {
+            $queryBuilder
+                ->andWhere('c.name LIKE :searchTerm')
+                ->setParameter('searchTerm', '%' . $searchData->getQ() . '%');
+        }
+
+        // Ajouter d'autres conditions de recherche au besoin
+
+        return $queryBuilder;
     }
 
 

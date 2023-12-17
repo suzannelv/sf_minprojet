@@ -1,30 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // console.log("js fonctionne");
+    console.log("js fonctionne");
+
     const favoriteToggleButtons = document.querySelectorAll(".favorite-toggle");
-    const notificationElement = document.querySelectorAll(".notification");
 
     favoriteToggleButtons.forEach(function (button) {
-        button.addEventListener("click", function (event) {
+        button.addEventListener("click", async function (event) {
             event.preventDefault();
+
             const courseId = button.getAttribute("data-course-id");
             const toggleUrl = button.getAttribute("data-toggle-url");
             const notificationElement = button
                 .closest(".course-card")
-                .querySelectorAll(".notification");
+                .querySelector(".notification");
+            const heartIcon = button.querySelector(".fa-heart");
 
-            axios
-                .post(
-                    toggleUrl,
-                    {},
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
-                        },
-                        withCredentials: true,
-                    }
-                )
-                .then((response) => {
+            console.log("Button clicked");
+
+            if (notificationElement) {
+                try {
+                    console.log("Before Axios Request");
+                    const response = await axios.post(
+                        toggleUrl,
+                        {},
+                        {
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                            },
+                            withCredentials: true,
+                        }
+                    );
+                    console.log("After Axios Request");
+
                     console.log(response.data);
 
                     if (
@@ -36,31 +43,27 @@ document.addEventListener("DOMContentLoaded", function () {
                         notificationElement.style.backgroundColor = "#4CAF50";
                         notificationElement.style.display = "block";
 
-                        // mise à jour la couleur d'icon
-                        const heartIcon = button.querySelector(".fa-heart");
-                        heartIcon.classList.toggle("active");
-
-                        // cacher la notification au bout de 3 secondes
-                        requestAnimationFrame(() => {
-                            setTimeout(() => {
-                                notificationElement.style.display = "none";
-                            }, 3000);
-                        });
+                        // Ajouter ou supprimer la classe "active" du cœur
+                        heartIcon.classList.toggle("active", true);
                     } else {
                         notificationElement.innerText = "Supprimer favori";
                         notificationElement.style.backgroundColor = "#ff0000";
                         notificationElement.style.display = "block";
-                        setTimeout(() => {
-                            notificationElement.style.display = "none";
-                        }, 3000);
+
+                        // Ajouter ou supprimer la classe "active" du cœur
+                        heartIcon.classList.toggle("active", false);
                     }
-                })
-                .catch((error) => {
+
+                    setTimeout(() => {
+                        notificationElement.style.display = "none";
+                    }, 3000);
+                } catch (error) {
                     console.error("Error:", error);
                     notificationElement.innerText = "Erreur survenue";
                     notificationElement.style.backgroundColor = "#ff0000";
                     notificationElement.style.display = "block";
-                });
+                }
+            }
         });
     });
 });

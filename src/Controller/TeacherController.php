@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Course;
-use App\Repository\CourseRepository;
 use App\Repository\TeacherRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

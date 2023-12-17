@@ -31,11 +31,7 @@ class LangueController extends AbstractController
         }
 
         $coursCollection = $lang->getCourses();
-        // return $this->render('langue/index.html.twig', [
-        //     'coursesCollection' => $coursCollection,
-        //     'langue'=> $lang
-
-        // ]);
+    
         return $this->render('course/langue/coursesByLang.html.twig', [
             'coursesCollection'=> $coursCollection,
             'langue'=> $lang

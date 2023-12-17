@@ -2,7 +2,6 @@
 
 {% block title %}Contact{% endblock %}
 
-
 {% block body %}
 <section class="contact" id="contact">
   <div class="container">
@@ -11,6 +10,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         <br>incididunt ut labore et dolore magna aliqua.</p>
       </div>
+
       <div class="row">
         <div class="col-md-5">
             <div class="title">
@@ -42,26 +42,30 @@
         </div>
 
         <div class="col-md-7">
-          <form>
+         {% for message in app.flashes('success') %}
+          <div class="alert alert-success mt-4">
+            {{message}}
+          </div>
+         {% endfor %}
+          {{ form_start(form_contact) }}
             <div class="row">
               <div class="col-sm-6">
-                  <input type="text" class="form-control" placeholder="Nom">
+                  {{ form_row(form_contact.fullname) }}
               </div>
               <div class="col-sm-6">
-                  <input type="email" class="form-control" placeholder="Email">
+                 {{ form_row(form_contact.email) }}
               </div>
               <div class="col-sm-12">
-                  <input type="text" class="form-control" placeholder="Subjet">
+                   {{ form_row(form_contact.suject) }}
               </div>
             </div>
             <div class="form-group">
-              <textarea class="form-control" rows="5" id="comment" placeholder="Message"></textarea>
-            </div>
-            <button class="btn" type="submit">Envoyer</button>
-          </form>
+              {{ form_row(form_contact.message) }}
+            </div>   
+          {{ form_end(form_contact) }}
+
         </div>
       </div>
   </div>
 </section>
-
 {% endblock %}

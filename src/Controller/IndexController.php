@@ -36,27 +36,27 @@ class IndexController extends AbstractController
         return $this->render('index/about.html.twig');
     }
 
-    #[Route('/contact', name: 'contact')]
-    public function contact(): Response
-    {
-       
-        return $this->render('index/contact.html.twig');
-    }
 
-    #[Route('/search', name: 'search')]
-    public function searchBar( Request $request): Response
+    #[Route('/search', name: 'search', methods:['GET'])]
+    public function searchBar(Request $request, CourseRepository $coursesRepository, PaginatorInterface $paginator): Response
     {
-        $searchData =new SearchData();
+        $searchData = new SearchData();
         $form = $this->createForm(SearchType::class, $searchData);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-             $searchData->q;
-        }
-  
+        $queryBuilder = $coursesRepository->getSearchQueryBuilder($searchData);
+
+        $pagination = $paginator->paginate(
+            $queryBuilder,
+            $request->query->getInt('page', 1), 
+            6
+        );
+
         return $this->render('partial/_search_data.html.twig', [
-            'form'=>$form->createView()
+            'form_search' => $form->createView(),
+            'search_course' => $pagination,
         ]);
     }
+
 }

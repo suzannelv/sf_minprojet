@@ -65,8 +65,7 @@ class RegistrationController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // $this->logger->error('An error occurred while uploading the file: ' . $e->getMessage());
-                  
+                    
                 }
 
                 $user->setProfileUser($newFilename); 

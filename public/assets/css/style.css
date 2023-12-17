@@ -148,3 +148,13 @@ a:hover {
     font-weight: 300;
     color: #999999;
 }
+
+.actu-img {
+    width: 50%;
+    height: auto;
+}
+
+.top-ld {
+    width: 160px;
+    height: auto;
+}
